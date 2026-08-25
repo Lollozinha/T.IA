@@ -18,19 +18,19 @@ A aplicação também contemplará de funcionalidades destinadas ao gerenciament
 
 <br>
 
-## Tecnologias e Linguagens
+## 📚 Tecnologias, Linguagens e _Frameworks_
 
 A aplicação mobile será desenvolvida com _front-end_ em _React Native_ (com o objetivo de abranger multiplataformas, como _Android_ e IOS), _back-end_ em Node JS e integração com a API _text-to-speech_ ChatterBox para clonagem de voz. Além disso, será desenvolvida através do Ambiente de Desenvolvimento Integrado (IDE, do inglês _Integrated Development Environment_) Visual Studio Code, com o banco de dados em MySQL gerenciado através do MySQL Workbench.
 
 <br>
 
-## 📚​ Bibliotecas e _Frameworks_
-
-
-
-<br>
-
 ## Pré-requisitos
+
+### _Android_
+
+
+
+### IOS
 
 
 
