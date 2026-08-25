@@ -1,3 +1,44 @@
+# T.IA
+
+## Sobre o Projeto
+
+T.IA: Aplicação _mobile_ direcionada a apoiar o desenvolvimento cognitivo com inteligência artificial para crianças com Transtorno do Espectro Autista (TEA) – Nível I de suporte.
+
+## Funcionalidades
+
+
+
+## Tecnologias e Linguagens
+
+
+
+## Bibliotecas e _Frameworks_
+
+
+
+## Pré-requisitos
+
+
+
+## Instalação
+
+
+
+## Autores
+
+Lorena Cunha de Souza
+Natan Fernando Souza da Costa
+
+## Licença
+
+
+
+## Visuais
+
+
+
+### Anotações
+
 URGÊNCIA: Entender as licenças do Git. Porquê usariamos a MIT?
 
 Descrição do Projeto:
