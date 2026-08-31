@@ -1,4 +1,9 @@
 <x-guest-layout>
+    {{--
+      Desafio TOTP após e-mail/senha corretos (req. 1.6).
+      A sessão ainda NÃO está autenticada: Auth2FA segura as credenciais até o OTP
+      de 6 dígitos (ou código de recuperação) ser conferido com o segredo do banco.
+    --}}
     <h1 class="text-lg font-semibold text-slate-800 mb-2">{{ __('Verificação em dois fatores') }}</h1>
     <p class="text-sm text-slate-600 mb-4">
         {{ __('Digite o código de 6 dígitos do aplicativo autenticador. Você também pode usar um código de recuperação.') }}
@@ -35,6 +40,7 @@
             <x-input-error :messages="$errors->get('recovery_code')" class="mt-2" />
         </div>
 
+        {{-- Lockout de 5 tentativas também vale para OTP inválido (chave login-2fa:{ip}). --}}
         <x-input-error :messages="$errors->get('email')" class="mt-2" />
 
         <button type="button" class="text-sm text-sky-800 underline min-h-11" @click="useRecovery = !useRecovery">

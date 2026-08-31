@@ -18,6 +18,7 @@ return [
     |
     */
 
+    // T.IA: database para invalidar no logout/reset via DELETE em `sessions` (1.10).
     'driver' => env('SESSION_DRIVER', 'database'),
 
     /*
@@ -32,6 +33,7 @@ return [
     |
     */
 
+    // Idle de 120 min (inatividade). Não é “lembrar para sempre”.
     'lifetime' => (int) env('SESSION_LIFETIME', 120),
 
     'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
@@ -47,6 +49,7 @@ return [
     |
     */
 
+    // Payload cifrado em repouso na tabela `sessions`.
     'encrypt' => env('SESSION_ENCRYPT', true),
 
     /*

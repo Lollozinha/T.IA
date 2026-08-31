@@ -37,6 +37,7 @@
                         </x-primary-button>
                     </form>
 
+                    {{-- Mediador não vê este botão: 2FA é obrigatório (TwoFactorController::destroy aborta 403). --}}
                     @unless ($isMediator)
                         <form method="POST" action="{{ route('two-factor.destroy') }}" onsubmit="return confirm('Desativar 2FA?')">
                             @csrf
@@ -51,6 +52,7 @@
                         {{ __('Escaneie o QR Code no Google Authenticator, Authy ou app compatível. Em seguida, confirme com o código de 6 dígitos.') }}
                     </p>
 
+                    {{-- QR SVG gerado pelo Laragear (toQr). O segredo TOTP permanece cifrado no MySQL. --}}
                     @if ($qrCode)
                         <div class="flex justify-center overflow-hidden">
                             <div class="w-full max-w-xs [&_svg]:w-full [&_svg]:h-auto">
@@ -64,6 +66,7 @@
                         <p class="font-mono text-sm break-all bg-slate-50 rounded-lg px-3 py-2 border border-slate-200">{{ $secret }}</p>
                     @endif
 
+                    {{-- Confirmacao: 6 dígitos TOTP (período ~30 s). Sem isto o 2FA não fica enabled. --}}
                     <form method="POST" action="{{ route('two-factor.confirm') }}" class="space-y-3">
                         @csrf
                         <div>

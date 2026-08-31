@@ -12,6 +12,10 @@ use Illuminate\Notifications\Notifiable;
 use Laragear\TwoFactor\Contracts\TwoFactorAuthenticatable;
 use Laragear\TwoFactor\TwoFactorAuthentication;
 
+/**
+ * Conta do T.IA. Senha: cast `hashed` → Argon2id (salt no próprio digest).
+ * 2FA: trait TwoFactorAuthentication (Laragear); segredo TOTP fora desta tabela.
+ */
 #[Fillable(['name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements TwoFactorAuthenticatable
@@ -20,6 +24,9 @@ class User extends Authenticatable implements TwoFactorAuthenticatable
     use HasFactory, Notifiable, TwoFactorAuthentication;
 
     /**
+     * `hashed`: Hash::make() na gravação e Hash::check() na leitura/login.
+     * Driver efetivo: config/hashing.php → env HASH_DRIVER (argon2id no Docker).
+     *
      * @return array<string, string>
      */
     protected function casts(): array

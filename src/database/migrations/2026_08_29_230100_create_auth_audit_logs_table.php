@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Tabela de evidência 2.6: mesmos eventos do log JSON, consultáveis no MySQL.
+     * email_hash CHAR-like 64 = SHA-256 hex; sem PII em claro.
+     */
     public function up(): void
     {
         Schema::create('auth_audit_logs', function (Blueprint $table) {

@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
+/**
+ * Pedido do link “esqueci a senha” (anti-enumeração).
+ *
+ * Password::sendResetLink(): se o e-mail existir, grava Hash::make($token) em
+ * password_reset_tokens e envia o link. Se não existir (ou throttle 60 s),
+ * NÃO revela isso na UI: a mensagem é sempre a genérica RESET_LINK_SENT (2.1).
+ * Tentativas indevidas ainda vão para a auditoria (outcome=failure + reason).
+ */
 class PasswordResetLinkController extends Controller
 {
     public function create(): View
@@ -45,6 +53,7 @@ class PasswordResetLinkController extends Controller
             );
         }
 
+        // Sempre a mesma resposta visível: não confirma se o e-mail está cadastrado.
         return back()->with('status', __(Password::RESET_LINK_SENT));
     }
 }

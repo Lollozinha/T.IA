@@ -15,10 +15,20 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
+/**
+ * Redefinição de senha: token de uso único, curto e armazenado com hash.
+ *
+ * O e-mail leva o token em claro; a tabela `password_reset_tokens` guarda só
+ * Hash::make($token). Conferência: Hash::check no broker. Após sucesso o Laravel
+ * APAGA a linha → o mesmo link na 2ª vez cai em "Link inválido ou expirado" (2.2 / 2.5).
+ *
+ * Expiração: PASSWORD_RESET_EXPIRE (padrão 15 min) em config/auth.php.
+ */
 class NewPasswordController extends Controller
 {
     public function create(Request $request): View
     {
+        // Valida o token JÁ no GET: link morto não mostra o formulário de senha.
         if (! $this->resetTokenIsValid($request->query('email'), $request->route('token'))) {
             $this->auditInvalidToken($request->query('email'), 'link_opened');
 
@@ -42,11 +52,13 @@ class NewPasswordController extends Controller
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function (User $user) use ($request) {
+                // Cast `hashed` no User aplica Argon2id de novo; remember_token gira.
                 $user->forceFill([
                     'password' => $request->password,
                     'remember_token' => Str::random(60),
                 ])->save();
 
+                // Sessões antigas morrem: quem estava logado com a senha velha sai (2.7).
                 DB::table('sessions')->where('user_id', $user->id)->delete();
 
                 event(new PasswordReset($user));

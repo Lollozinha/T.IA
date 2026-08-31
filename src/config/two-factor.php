@@ -1,5 +1,11 @@
 <?php
 
+/*
+| T.IA — 2FA TOTP (Laragear).
+| OTP de 6 dígitos, um uso por período (cache 2fa.code). Safe devices DESLIGADO:
+| todo login de Mediador com 2FA ativo pede o desafio (não “lembrar dispositivo”).
+| O QR SVG é gerado em TwoFactorController::show; a confirmação é confirmTwoFactorAuth.
+*/
 return [
     /*
     |--------------------------------------------------------------------------
@@ -42,6 +48,8 @@ return [
     | Authenticating with Two-Factor Codes can become very obnoxious when the
     | user does it every time. "Safe devices" allows to remember the device
     | for a period of time which 2FA Codes won't be asked when login in.
+    |
+    | T.IA: enabled=false — o Mediador sempre enfrenta o desafio OTP após a senha.
     |
     */
 

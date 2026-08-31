@@ -11,6 +11,13 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
+/*
+| Auth T.IA
+| POST /login: Argon2id + lockout 5/2h (LoginRequest) + desafio TOTP se 2FA ativo.
+|            throttle:login = 20 req/min (anti-flood, distinto do lockout).
+| POST /logout: DELETE FROM sessions WHERE user_id (1.10).
+| Reset: token hasheado, 15 min, uso único; GET já rejeita link morto (sem formulário).
+*/
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
@@ -55,6 +62,7 @@ Route::middleware('auth')->group(function () {
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
+    // Logout: apaga as linhas do usuário na tabela MySQL `sessions` (req. 1.10).
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });

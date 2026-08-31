@@ -1,4 +1,8 @@
 <x-guest-layout>
+    {{--
+      Token expirado, já usado ou inválido (req. 2.2 / 2.5).
+      Sem campos de senha: o link morto não pode ser reaproveitado no front.
+    --}}
     <h1 class="text-lg font-semibold text-slate-800 mb-2">
         {{ __('Link inválido ou expirado') }}
     </h1>

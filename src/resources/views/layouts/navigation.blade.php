@@ -48,7 +48,7 @@
                             </x-dropdown-link>
                         @endif
 
-                        <!-- Authentication -->
+                        {{-- Sair: DELETE FROM sessions WHERE user_id (AuthenticatedSessionController). --}}
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 

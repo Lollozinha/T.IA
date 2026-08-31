@@ -3,6 +3,7 @@
         {{ __('Informe o e-mail da conta. Se ele existir, enviaremos um link para redefinir a senha. O link expira em pouco tempo e só pode ser usado uma vez.') }}
     </div>
 
+    {{-- Anti-enumeração: a mensagem de sucesso é a mesma se o e-mail existir ou não. --}}
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('password.email') }}" class="space-y-4">

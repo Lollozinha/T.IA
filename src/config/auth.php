@@ -90,6 +90,9 @@ return [
     | generating more password reset tokens. This prevents the user from
     | quickly generating a very large amount of password reset tokens.
     |
+    | T.IA (req. 2.2–2.4): expire=15 min. A coluna token guarda Hash::make(),
+    | não o valor enviado no e-mail. Após o reset o broker apaga a linha (uso único).
+    |
     */
 
     'passwords' => [

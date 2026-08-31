@@ -1,4 +1,5 @@
 <x-guest-layout>
+    {{-- Cadastro: senha vai para Argon2id (cast hashed). Mediador é redirecionado ao QR 2FA. --}}
     <form method="POST" action="{{ route('register') }}" class="space-y-4">
         @csrf
 

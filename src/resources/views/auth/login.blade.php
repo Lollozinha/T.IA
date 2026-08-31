@@ -4,6 +4,8 @@
     <form method="POST" action="{{ route('login') }}" class="space-y-4">
         @csrf
 
+        {{-- Erros de senha e de lockout (5 tentativas → 2 h, minutos restantes) saem em errors.email --}}
+
         <div>
             <x-input-label for="email" :value="__('E-mail')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />

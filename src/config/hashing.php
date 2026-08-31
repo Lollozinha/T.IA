@@ -13,6 +13,10 @@ return [
     |
     | Supported: "bcrypt", "argon", "argon2id"
     |
+    | T.IA (req. 1.1–1.4): Argon2id (RFC 9106 / OWASP). O digest PHC na coluna
+    | users.password traz algoritmo, custos, salt aleatório e hash — a senha em
+    | claro nunca é persistida. Testes usam bcrypt só para a suíte não ficar lenta.
+    |
     */
 
     'driver' => env('HASH_DRIVER', 'argon2id'),
@@ -45,6 +49,7 @@ return [
     |
     */
 
+    // Custos acadêmicos: 64 MiB, 4 passes, 1 thread (justificativa no REQUISITO-1).
     'argon' => [
         'memory' => (int) env('ARGON_MEMORY', 65536),
         'threads' => (int) env('ARGON_THREADS', 1),

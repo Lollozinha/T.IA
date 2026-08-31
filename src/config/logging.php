@@ -135,6 +135,8 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        // Canal da disciplina: cada linha é um JSON (AuditAuthEvent). Arquivo diário
+        // storage/logs/audit-YYYY-MM-DD.log — e-mail só como SHA-256 (email_hash).
         'audit' => [
             'driver' => 'daily',
             'path' => storage_path('logs/audit.log'),

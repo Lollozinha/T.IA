@@ -1,4 +1,5 @@
 <x-guest-layout>
+    {{-- Token na URL já foi validado no GET; POST revalida e apaga a linha (uso único). --}}
     <form method="POST" action="{{ route('password.store') }}" class="space-y-4">
         @csrf
 

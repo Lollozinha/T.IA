@@ -16,17 +16,20 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            // Digest Argon2id (PHC), nunca senha em claro. Salt vai no próprio hash.
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
 
+        // Token de reset: coluna `token` = hash; o valor em claro só vai no e-mail.
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
+        // Sessões auditáveis: logout e reset fazem DELETE WHERE user_id = ?.
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();
